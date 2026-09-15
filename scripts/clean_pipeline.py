@@ -502,7 +502,7 @@ daily.to_csv(OUT_DIR / "dim_weather_daily.csv", index=False)
 log(f"- Cleaned rows: {len(daily)} daily records (from {raw_rows} raw sensor readings, {we['sensor_id'].nunique()} sensors)\n")
 
 
-with open(DOC_DIR / "cleaning_report.md", "w") as f:
+with open(DOC_DIR / "cleaning__report.md", "w") as f:
     f.write("# Track 3 - Data Rescue & Cleaning Report\n\n")
     f.write("\n".join(report_lines))
 
