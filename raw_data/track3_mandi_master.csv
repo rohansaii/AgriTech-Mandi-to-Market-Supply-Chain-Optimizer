@@ -1,0 +1,61 @@
+mandi_id,mandi_name,district,state,mandi_type,total_area_acres
+MANDI001,Hyderabad Mandi,ludhiana,Punjab,Private,11
+MANDI006,Kochi Mandi,Amritsar,Punjab,Direct,34
+MANDI037,Jorhat Grain Market,Kurukshetra,Haryana,APMC,NA
+MANDI046,Baranagar Market,,Uttar Pradesh,Private,13
+MANDI014,Bathinda Grain Market,Patiala,Punjab,PRIVATE,25
+MANDI055,Chandigarh APMC,Bareilly,Uttar Pradesh,apmc,12
+MANDI034,Ludhiana Grain Market,Ambala,Haryana,,11
+MANDI049,Machilipatnam Mandi,Muzaffarnagar,Uttar Pradesh,Private,39
+MANDI013,Aurangabad Market,Patiala,Punjab,Private,25
+MANDI001,Hyderabad Mandi,ludhiana,Punjab,Private,11
+MANDI047,Orai Market,Muzaffarnagar,Uttar Pradesh,APMC,NA
+MANDI051,Gulbarga Market,Saharanpur,Uttar Pradesh,Private,11
+MANDI032,Chapra Grain Market,,Haryana,PRIVATE,20
+MANDI004,Khandwa Grain Market,Ludhiana,Punjab,APMC,15
+MANDI053,Panihati Market,Saharanpur,Uttar Pradesh,APMC,NA
+MANDI018,Jaunpur Mandi,MOGA,Punjab,,9
+MANDI009,Jamshedpur APMC,Jalandhar,Punjab,apmc,28
+MANDI007,Nashik Mandi,Amritsar,Punjab,PRIVATE,45
+MANDI041,Gurgaon Grain Market,FATEHABAD,Haryana,APMC,39
+MANDI005,Bhilwara Grain Market,Amritsar,Punjab,Direct,29
+MANDI044,Dehri Mandi,Agra,Uttar Pradesh,APMC,41
+MANDI020,Kadapa Mandi,Ferozepur,Punjab,Direct,26
+MANDI035,Guntakal Mandi,Ambala,Haryana,APMC,17
+MANDI006,Kochi Mandi,Amritsar,Punjab,Direct,34
+MANDI026,Tadipatri Mandi,Hisar,Haryana,Private,35
+MANDI057,Gorakhpur APMC,Bareilly,,Direct,7
+MANDI016,Kulti APMC,Bathinda,Punjab,,42
+MANDI028,Machilipatnam APMC,Hisar,Haryana,,33
+MANDI010,Dhule APMC,Jalandhar,Punjab,Direct,48
+MANDI031,Nangloi Jat Mandi,Sirsa,Haryana,APMC,22
+MANDI027,Kochi APMC,Hisar,Haryana,apmc,39
+MANDI017,Parbhani Market,,Punjab,PRIVATE,8
+MANDI025,Dindigul APMC,karnal,Haryana,APMC,NA
+MANDI056,Bilaspur Mandi,Bareilly,Uttar Pradesh,Private,28
+MANDI012,Gaya Grain Market,Patiala,Punjab,,48
+MANDI033,South Dumdum Grain Market,AMBALA,Haryana,apmc,31
+MANDI054,Nangloi Jat Grain Market,Saharanpur,,Direct,45
+MANDI042,Erode Mandi,Fatehabad,Haryana,PRIVATE,38
+MANDI038,Jalandhar Mandi,Kurukshetra,Haryana,Private,36
+MANDI030,Patiala APMC,Sirsa,,,19
+MANDI045,Farrukhabad Mandi,Meerut,Uttar Pradesh,PRIVATE,25
+MANDI002,Solapur Mandi,Ludhiana,,APMC,37
+MANDI022,Eluru APMC,Karnal,Haryana,,45
+MANDI003,Vijayawada Mandi,Ludhiana,Punjab,,19
+MANDI048,Chittoor Mandi,muzaffarnagar,Uttar Pradesh,Direct,27
+MANDI040,Jodhpur Market,Fatehabad,Haryana,Direct,40
+MANDI036,Mysore Grain Market,KURUKSHETRA,Haryana,apmc,9
+MANDI024,Jaipur Mandi,Karnal,Haryana,APMC,24
+MANDI050,Durg Market,Muzaffarnagar,Uttar Pradesh,,47
+MANDI011,Arrah Mandi,Patiala,Punjab,,34
+MANDI023,Panihati APMC,KARNAL,Haryana,PRIVATE,38
+MANDI019,Karimnagar Grain Market,Moga,Punjab,PRIVATE,40
+MANDI031,Nangloi Jat Mandi,Sirsa,Haryana,APMC,22
+MANDI021,Guna Mandi,Ferozepur,Punjab,APMC,21
+MANDI008,Bijapur Market,Amritsar,Punjab,APMC,23
+MANDI043,Danapur Mandi,Agra,Uttar Pradesh,Private,NA
+MANDI015,Amravati Grain Market,Bathinda,Punjab,apmc,13
+MANDI029,Asansol Grain Market,SIRSA,Haryana,Direct,NA
+MANDI052,Kakinada APMC,Saharanpur,Uttar Pradesh,,48
+MANDI039,Anand Grain Market,,Haryana,APMC,5
