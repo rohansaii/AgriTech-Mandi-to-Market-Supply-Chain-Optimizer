@@ -1,8 +1,8 @@
 # Track 3 – AgriTech: Mandi-to-Market Supply Chain Optimizer
 
-TransOrg AgentIQ Datathon submission. Takes messy, real-world mandi/crop data and turns it into a clean, query-ready analytics layer — with a Power BI dashboard on top and a text-to-chart AI agent as a bonus layer.
+TransOrg AgentIQ Datathon submission. Takes messy, real-world mandi/crop data and transforms it into a clean, query-ready analytics layer, with a Power BI dashboard on top and an optional text-to-chart AI agent.
 
-> **Note:** This is a data cleaning + Power BI analytics project, not a production system. All cleaning decisions (including the judgment calls) are documented in `docs/data_dictionary.md` so the pipeline is auditable, not a black box.
+> **Note:** This is a data cleaning + Power BI analytics project, not a production system. All major cleaning decisions and assumptions are documented in `docs/data_dictionary.md` and `docs/cleaning_report.md` so the pipeline is auditable and reproducible.
 
 🔗 **Live Dashboard:** _coming soon — will be linked here once published_
 
@@ -13,28 +13,51 @@ TransOrg AgentIQ Datathon submission. Takes messy, real-world mandi/crop data an
 - **Source files cleaned:** 5 raw datasets → 5 query-ready CSVs
 - **Domains covered:** Mandi arrivals, price vs. MSP, transport/logistics, weather
 - **Core metrics:** Total arrivals (Quintals), Modal Price vs. MSP, Price Crash instances, Transit time & delay rate, Top mandis by volume
-- **Data source:** raw CSV/Excel files with mandi IDs, crop names, arrival quantities, prices, transport records, and daily weather — all inconsistently formatted (see cleaning table below)
+- **Data source:** Raw CSV, JSON and Excel files containing mandi, crop, arrival, price, transport and weather data with inconsistent formats.
 
 ---
 
 ## 🗂️ Pipeline Stages
 
-### 1. Data Rescue (`scripts/clean_pipeline.py`)
-Reads the raw files and regenerates everything in `data/` plus `docs/cleaning_report.md`. Fully reproducible and idempotent — re-run it as many times as you like.
+### 1. Raw Data (`raw_data/`)
 
-### 2. Analytics Layer (`data/`)
+Contains the five original Track 3 source files used as inputs to the cleaning pipeline.
+
+### 2. Data Rescue (`scripts/clean_pipeline.py`)
+
+Reads the raw files from `raw_data/`, cleans and standardizes them, and generates the final analytics-ready datasets in `data/`.
+
+The pipeline is designed to be reproducible and idempotent.
+
+### 3. Notebook Version (`notebooks/clean_pipeline.ipynb`)
+
+A Jupyter Notebook version of the same cleaning pipeline is provided for easier inspection and demonstration of the data-cleaning process.
+
+### 4. Analytics Layer (`data/`)
+
 Five clean, star-schema-ready CSVs:
+
 - `dim_mandi.csv`
 - `fact_arrivals.csv`
 - `fact_price_msp.csv`
 - `fact_transport.csv`
 - `dim_weather_daily.csv`
 
-### 3. Power BI Dashboard
-Built on top of the cleaned CSVs, following `docs/star_schema_and_powerbi_guide.md` — relationships, DAX measures, and four dashboard pages covering arrivals, price/MSP comparison, transport, and weather trends.
+### 5. Power BI Dashboard
 
-### 4. Bonus Agent (`bonus_agent/app.py`)
-A Streamlit text-to-chart agent. Type a question like *"Plot the daily arrival trend of Wheat in Amritsar mandi vs MSP for the last 30 days"* and it picks the right chart type and generates it, plus a one-line summary.
+Built on top of the cleaned CSVs, following `docs/star_schema_and_powerbi_guide.md` for relationships, DAX measures, and dashboard design.
+
+The dashboard covers:
+
+- Executive Overview
+- Price Discovery
+- Supply Chain
+- Weather Impact
+- Advanced Insights
+
+### 6. Bonus Agent (`bonus_agent/app.py`)
+
+Optional Streamlit text-to-chart agent. It allows users to ask analytical questions in natural language and generate appropriate visualizations.
 
 ---
 
@@ -42,35 +65,52 @@ A Streamlit text-to-chart agent. Type a question like *"Plot the daily arrival t
 
 | Issue | Fix |
 |---|---|
-| 4 different mandi_id formats (`MANDI001`, `MANDI-034`, `mandi_031`, `M017`, `034`) | Regex-normalized to `MANDI0##` everywhere |
-| Crop names in English/Hindi/Punjabi, mixed case | Canonical crop mapping, raw value preserved in `raw_crop_name` |
-| Quantities in Tonnes/Quintals/KG, sometimes with the unit embedded in the number | Parsed and converted to Quintals throughout |
-| 5 different date formats across all files | Format detected per-pattern, parsed to ISO dates |
-| Negative arrival quantities & transit hours | Treated as sign errors, corrected and flagged rather than dropped |
-| Prices as `₹1,234`, `Rs. 1,234`, `INR 1234`, `1234/-` | Currency symbols/commas stripped, converted to numeric |
-| Weather timestamps in UTC/IST, temps in °C/°F, rainfall in mm/inches | Standardized to IST / Celsius / mm |
-| Vehicle numbers in 6+ spacing/casing styles | Standardized to `SS-NN-LL-NNNN` |
-| Duplicate rows across every file | Exact duplicates dropped; near-duplicates re-keyed with synthetic IDs |
-| No sensor→district mapping in weather file | Not fabricated — weather aggregated to a national daily series, documented as a limitation |
+| Multiple mandi ID formats (`MANDI001`, `MANDI-034`, `mandi_031`, `M017`, `034`) | Normalized to canonical `MANDI0##` format |
+| Crop names in English/Hindi/Punjabi and mixed case | Canonical crop mapping applied; original values preserved in `raw_crop_name` |
+| Quantities in Tonnes/Quintals/KG, sometimes with the unit embedded in the value | Parsed and converted to Quintals |
+| Multiple date formats | Format-specific parsing applied and standardized to dates |
+| Negative arrival quantities | Converted to absolute values and flagged with `qty_was_negative` |
+| Missing farmer counts | Imputed using the median farmer count for the corresponding crop and flagged |
+| Prices such as `₹1,234`, `Rs. 1,234`, `INR 1234`, `1234/-` | Currency symbols, commas and formatting removed and converted to numeric |
+| Weather timestamps in UTC/IST | Standardized to IST |
+| Temperatures in °C/°F | Standardized to Celsius |
+| Rainfall in mm/inches | Standardized to millimeters |
+| Negative/impossible rainfall values | Set to missing |
+| Vehicle numbers with inconsistent spacing/casing | Standardized to `SS-NN-LL-NNNN` where valid |
+| Exact duplicate records | Removed |
+| Missing arrival IDs | Synthetic IDs generated and flagged |
+| Missing transport distance units | Assumed to be km and flagged |
+| No sensor → mandi/district mapping | No artificial mapping created; weather aggregated to a national daily series |
 
-Full detail and reasoning for every decision (including the ones that could reasonably go another way, like Rice vs. Paddy or assuming missing distance units are km) is in `docs/data_dictionary.md`.
+Full details and reasoning are documented in:
+
+- `docs/data_dictionary.md`
+- `docs/cleaning_report.md`
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Python (pandas, numpy, openpyxl)** – cleaning pipeline
-- **Power BI Desktop** – data modeling, DAX measures, report design
-- **Streamlit + Plotly** – bonus text-to-chart agent
+- **Python (pandas, numpy, openpyxl)** – data cleaning and transformation
+- **Jupyter Notebook** – interactive pipeline documentation
+- **Power BI Desktop** – data modeling, DAX measures and dashboard design
+- **Streamlit + Plotly** – optional text-to-chart AI agent
 
 ---
 
 ## 📁 Repository Structure
 
-```
+```text
 track3_clean/
 │
 ├── README.md
+│
+├── raw_data/
+│   ├── track3_mandi_arrivals.csv
+│   ├── track3_mandi_master.csv
+│   ├── track3_price_and_msp.json
+│   ├── track3_weather_sensors.xlsx
+│   └── track3_transport_logistics.csv
 │
 ├── data/
 │   ├── dim_mandi.csv
@@ -81,6 +121,9 @@ track3_clean/
 │
 ├── scripts/
 │   └── clean_pipeline.py
+│
+├── notebooks/
+│   └── clean_pipeline.ipynb
 │
 ├── docs/
 │   ├── data_dictionary.md
