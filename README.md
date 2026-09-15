@@ -3,8 +3,9 @@
 TransOrg AgentIQ Datathon submission. Takes messy, real-world mandi/crop data and transforms it into a clean, query-ready analytics layer, with a Power BI dashboard on top and an optional text-to-chart AI agent.
 
 > **Note:** This is a data cleaning + Power BI analytics project, not a production system. All major cleaning decisions and assumptions are documented in `docs/data_dictionary.md` and `docs/cleaning_report.md` so the pipeline is auditable and reproducible.
-
+> 
 🔗 **Live Dashboard:** _coming soon — will be linked here once published_
+🔗 **Live AI Analytics Agent:** https://agri-tech-mandi-to-market-supply-chain-optimizer-egapmnofzfnzc.streamlit.app/
 
 ---
 
@@ -55,9 +56,13 @@ The dashboard covers:
 - Weather Impact
 - Advanced Insights
 
-### 6. Bonus Agent (`bonus_agent/app.py`)
+The Power BI report file is included in the repository for reference and reproducibility.
 
-Optional Streamlit text-to-chart agent. It allows users to ask analytical questions in natural language and generate appropriate visualizations.
+### 6. Bonus Agent (`bonus_agent/`)
+
+A Streamlit text-to-chart analytics agent. It allows users to ask analytical questions in natural language and generates appropriate visualizations and factual insights.
+
+🔗 **Live AI Analytics Agent:** https://agri-tech-mandi-to-market-supply-chain-optimizer-egapmnofzfnzc.streamlit.app/
 
 ---
 
@@ -94,7 +99,7 @@ Full details and reasoning are documented in:
 - **Python (pandas, numpy, openpyxl)** – data cleaning and transformation
 - **Jupyter Notebook** – interactive pipeline documentation
 - **Power BI Desktop** – data modeling, DAX measures and dashboard design
-- **Streamlit + Plotly** – optional text-to-chart AI agent
+- **Streamlit + Plotly** – text-to-chart AI agent
 
 ---
 
@@ -104,6 +109,8 @@ Full details and reasoning are documented in:
 track3_clean/
 │
 ├── README.md
+│
+├── AgriTech-Mandi-to-Market-Supply-Chain-Optimizer.pbix
 │
 ├── raw_data/
 │   ├── track3_mandi_arrivals.csv
@@ -131,7 +138,9 @@ track3_clean/
 │   └── star_schema_and_powerbi_guide.md
 │
 ├── bonus_agent/
-│   └── app.py
+│   ├── app.py
+│   ├── requirements.txt
+│   └── README.md
 │
 └── images/
     ├── cover_page.png
@@ -146,28 +155,45 @@ track3_clean/
 
 ## ▶️ How to Run
 
-**Cleaning pipeline** (cleaned CSVs are already in `data/`, so this is optional):
+### Cleaning Pipeline
+
+The cleaned CSVs are already in `data/`, so running the pipeline is optional.
+
 ```bash
 pip install pandas numpy openpyxl
-cd scripts
-python3 clean_pipeline.py
+python scripts/clean_pipeline.py
 ```
 
-**Power BI dashboard:**
-Load the 5 CSVs from `data/`, then follow `docs/star_schema_and_powerbi_guide.md` for relationships, DAX measures, and dashboard pages.
+### Power BI Dashboard
 
-**Bonus agent:**
+Open the Power BI report file included in the repository:
+
+```text
+AgriTech-Mandi-to-Market-Supply-Chain-Optimizer.pbix
+```
+
+The report is built on the cleaned CSVs in `data/`.
+
+For the data model, relationships, DAX measures and dashboard guidance, see:
+
+```text
+docs/star_schema_and_powerbi_guide.md
+```
+
+### Bonus AI Agent
+
 ```bash
-pip install streamlit plotly pandas
-cd bonus_agent
-streamlit run app.py
+pip install -r bonus_agent/requirements.txt
+streamlit run bonus_agent/app.py
 ```
+
+🔗 **Live AI Analytics Agent:** https://agri-tech-mandi-to-market-supply-chain-optimizer-egapmnofzfnzc.streamlit.app/
 
 ---
 
 ## 📸 Preview
 
-| Cover | Executive Overview & Price Discovery |
+| Cover | Executive Overview |
 |---|---|
 | ![Cover](images/cover_page.png) | ![Executive Overview](images/executive_overview.png) |
 
@@ -186,3 +212,4 @@ streamlit run app.py
 - Add district-level weather mapping once sensor metadata is available
 - Automate cleaning + refresh on a schedule instead of manual re-runs
 - Add year-over-year arrival and price trend comparisons as more seasons of data come in
+- Expand the AI agent with conversational follow-up questions, forecasting and anomaly detection
