@@ -108,11 +108,12 @@ Full details and reasoning are documented in:
 ## 📁 Repository Structure
 
 ```text
-track3_clean/
+AgriTech-Mandi-to-Market-Supply-Chain-Optimizer/
 │
 ├── README.md
 │
 ├── AgriTech-Mandi-to-Market-Supply-Chain-Optimizer.pbix
+├── AgriTech_Presentation.pdf
 │
 ├── raw_data/
 │   ├── track3_mandi_arrivals.csv
